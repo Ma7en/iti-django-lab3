@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block title %}
+<div>
+    <h1>update</h1>
+</div>
+{% endblock %} {% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div>
+        <label for="first_name">First Name: </label>
+        <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            value="{{ trainee.first_name }}"
+            required
+        />
+    </div>
+
+    <div>
+        <label for="last_name">Last Name: </label>
+        <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            value="{{ trainee.last_name }}"
+            required
+        />
+    </div>
+
+    <div>
+        <label for="date_of_birth">Date Of Birth: </label>
+        <input
+            type="date"
+            id="date_of_birth"
+            name="date_of_birth"
+            value="{{ trainee.date_of_birth|date:'Y-m-d' }}"
+            required
+        />
+    </div>
+
+    <div>
+        <label for="account_obj">Account Username: </label>
+        <select name="account_obj" id="account_obj">
+            {% for account in accounts %}
+            <option value="{{ account.id }}" 
+            {% if account.id == trainee.account_obj.id %}
+                selected
+            {% endif %}
+                >{{ account.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div>
+        <label for="track_obj">Track Name: </label>
+        <select name="track_obj" id="track_obj">
+            {% for track in tracks %}
+            <option value="{{ track.id }}" 
+            {% if track.id == trainee.track_obj.id %}
+                selected
+            {% endif %}
+            >{{track.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+
+{% endblock %}

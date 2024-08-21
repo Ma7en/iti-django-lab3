@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %}
+<div>
+    <h1>Details Account</h1>
+</div>
+{% endblock %} {% block content %}
+
+<table width="100%" border="1px solid #000">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>pssword</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{account.id}}</td>
+            <td>{{account.email}}</td>
+            <td>{{account.password}}</td>
+            <td>
+                <a href="{%url 'account_details' account.id%}">Details</a>
+                <a href="{%url 'account_update' account.id%}">Update</a>
+                <a href="{%url 'account_delete' account.id%}">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

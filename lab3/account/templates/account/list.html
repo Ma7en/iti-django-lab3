@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block title %}
+
+<div>
+    <h1>accounts list</h1>
+</div>
+
+{% endblock %} {% block content %}
+<div>
+    <a href="{% url 'account_create' %}">Create</a>
+</div>
+
+<table width="100%" border="1px solid #000">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>pssword</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for account in accounts %}
+        <tr>
+            <td>{{account.id}}</td>
+            <td>{{account.username}}</td>
+            <td>{{account.email}}</td>
+            <td>{{account.password}}</td>
+            <td>
+                <a href="{%url 'account_details' account.id%}">Details</a>
+                <a href="{%url 'account_update' account.id%}">Update</a>
+                <a href="{%url 'account_delete' account.id%}">Delete</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock %}

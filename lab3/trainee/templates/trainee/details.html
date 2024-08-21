@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}
+<div>
+    <h1>Trainee Details</h1>
+</div>
+{% endblock %} {% block content %}
+
+<table width="100%" border="1px solid #000">
+    <thead>
+        <tr>
+            <th>ID</th>
+
+            <th>First Name</th>
+            <th>Last Name</th>
+
+            <th>Date of Birth</th>
+
+            <th>Account Username</th>
+            <th>Track Name</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{trainee.id}}</td>
+            <td>{{trainee.first_name}}</td>
+            <td>{{trainee.last_name}}</td>
+            <td>{{trainee.date_of_birth}}</td>
+            <td>{{trainee.account_obj.username}}</td>
+            <td>{{trainee.track_obj.name}}</td>
+            <td>
+                <a href="{%url 'trainee_details' trainee.id%}">Details</a>
+                <a href="{%url 'trainee_update' trainee.id%}">Update</a>
+                <a href="{%url 'trainee_delete' trainee.id%}">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
