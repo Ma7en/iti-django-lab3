@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}
+{% extends "base.html" %} {%load crispy_forms_tags %} {% block title %}
 <div>
     <h1>Create Track</h1>
 </div>
@@ -24,7 +24,7 @@
     <div>
         <input type="submit" value="Submit" />
     </div>
-    {% endcomment %} {{form}}
+    {% endcomment %} {{form|crispy}}
 
     <div>
         <input type="submit" value="Submit" />
