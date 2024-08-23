@@ -33,17 +33,21 @@ def track_create(request):
 def track_update(request, id):
     context = {}
     try:
-        trackobj = Track.objects.get(id=id)  # Fetch the account to be updated
+        trackobj = Track.objects.get(id=id)
         if request.method == "POST":
-            if (
-                len(request.POST["name"]) > 0
-                and len(request.POST["name"]) <= 100
-                and request.POST["description"]
-            ):
-                trackobj.name = request.POST["name"]
-                trackobj.description = request.POST["description"]
-                trackobj.save()
-                return redirect("track_list")
+            name = request.POST["name"]
+            description = request.POST["description"]
+            if len(name) > 0 and len(name) <= 100 and description:
+                # trackobj.name = request.POST["name"]
+                # trackobj.description = request.POST["description"]
+                # trackobj.save()
+                # ==============
+                # name = request.POST["name"]
+                # description = request.POST["description"]
+                # save()
+                # return redirect("track_list")
+                track_url = Track.track_update(id, name, description)
+                return redirect(track_url)
             else:
                 context["error"] = "Invalid data"
         context["track"] = trackobj
@@ -66,7 +70,6 @@ def track_delete(request, id):
 
 def track_details(request, id):
     context = {}
-    # trackobj = Track.objects.get(id=id)  # Fetch record from the database
     trackobj = Track.details_track(id)  # Fetch record from the database
     if trackobj is None:
         return HttpResponse("Track not found", status=404)

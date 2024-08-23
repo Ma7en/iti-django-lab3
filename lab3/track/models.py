@@ -31,8 +31,13 @@ class Track(models.Model):
         trackobj.save()
         return cls.get_list_url()
 
-    def track_update(self):
-        pass
+    @classmethod
+    def track_update(cls, id, name, description):
+        trackobj = cls.objects.get(pk=id)
+        trackobj.name = name
+        trackobj.description = description
+        trackobj.save()
+        return cls.get_list_url()
 
     @classmethod
     def delete_track(cls, id):
@@ -41,5 +46,4 @@ class Track(models.Model):
 
     @classmethod
     def details_track(cls, id):
-        # pass
         return cls.objects.get(pk=id)
