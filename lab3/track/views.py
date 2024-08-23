@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
 from .models import *
 from .forms import *
 
@@ -70,14 +71,29 @@ def track_update(request, id):
 
 
 def track_delete(request, id):
-    context = {}
+    # context = {}
+    # try:
+    #     if request.method == "GET":
+    #         trackobj = Track.delete_track(id)
+    #         return redirect(trackobj)
+    # except Track.DoesNotExist:
+    #     return HttpResponse("track not found", status=404)
+    # return render(request, "track/list.html", context)
+    # ============================================================
     try:
-        if request.method == "GET":
-            trackobj = Track.delete_track(id)
-            return redirect(trackobj)
+        trackobj = Track.objects.get(pk=id)
+        trackobj.delete()
+        return JsonResponse({"success": True})
     except Track.DoesNotExist:
-        return HttpResponse("track not found", status=404)
-    return render(request, "track/list.html", context)
+        return JsonResponse({"success": False, "error": "Track not found"}, status=404)
+    # ============================================================
+    # try:
+    #     if request.method == "POST":
+    #         trackobj = Track.delete_track(id)
+    #         trackobj.delete()
+    #         return JsonResponse({"success": True})  # استجابة JSON
+    # except Track.DoesNotExist:
+    #     return JsonResponse({"success": False, "error": "Track not found"}, status=404)
 
 
 def track_details(request, id):
