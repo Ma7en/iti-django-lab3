@@ -5,12 +5,6 @@ from .models import *
 
 # Create your views here.
 def track_list(request):
-    # pass
-    # context = {}
-    # tracks = Track.objects.all()
-    # context["tracks"] = tracks
-    # return render(request, "track/list.html", context)
-    # =================================================================
     context = {}
     tracks = Track.list_track()
     context["tracks"] = tracks
@@ -26,12 +20,6 @@ def track_create(request):
             and len(request.POST["name"]) <= 100
             and request.POST["description"]
         ):
-            # trackobj = Track()
-            # trackobj.name = request.POST["name"]
-            # trackobj.description = request.POST["description"]
-            # trackobj.save()
-            # return redirect("track_list")
-            # ======================================================
             name = request.POST["name"]
             description = request.POST["description"]
             trackobj = Track.create_track(name, description)
@@ -78,6 +66,9 @@ def track_delete(request, id):
 
 def track_details(request, id):
     context = {}
-    trackobj = Track.objects.get(id=id)  # Fetch record from the database
+    # trackobj = Track.objects.get(id=id)  # Fetch record from the database
+    trackobj = Track.details_track(id)  # Fetch record from the database
+    if trackobj is None:
+        return HttpResponse("Track not found", status=404)
     context["track"] = trackobj
     return render(request, "track/details.html", context)

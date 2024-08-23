@@ -22,7 +22,6 @@ class Track(models.Model):
     @classmethod
     def list_track(cls):
         return cls.objects.all()
-        # return cls.get_list_url()
 
     @classmethod
     def create_track(cls, name, description):
@@ -42,4 +41,5 @@ class Track(models.Model):
 
     @classmethod
     def details_track(cls, id):
-        pass
+        # pass
+        return cls.objects.get(pk=id)
