@@ -46,6 +46,7 @@ def trainee_create(request):
 def trainee_update(request, id):
 
     context = {}
+    traineeobj = ""
     accountsobj = Account.objects.all()  # Fetch all records from the database
     context["accounts"] = accountsobj
 
@@ -58,7 +59,6 @@ def trainee_update(request, id):
         return HttpResponse("Trainee not found", status=404)
 
     if request.method == "POST":
-        traineeobj = Trainee()
         traineeobj.first_name = request.POST["first_name"]
         traineeobj.last_name = request.POST["last_name"]
         traineeobj.date_of_birth = request.POST["date_of_birth"]
@@ -89,7 +89,6 @@ def trainee_update(request, id):
 
 
 def trainee_delete(request, id):
-
     context = {}
     try:
         traineeobj = Trainee.objects.get(id=id)  # Fetch the trainee to be deleted

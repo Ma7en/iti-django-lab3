@@ -57,15 +57,27 @@ def track_update(request, id):
 def track_delete(request, id):
     context = {}
     try:
-        trackobj = Track.objects.get(id=id)  # Fetch the trainee to be deleted
         if request.method == "GET":
-            trackobj.delete()
-            return redirect("track_list")
-        context["track"] = trackobj
+            trackobj = Track.delete_track(id)
+            return redirect(trackobj)
     except Track.DoesNotExist:
         return HttpResponse("track not found", status=404)
+    return render(request, "track/list.html", context)
 
-    return render(request, "track/delete.html", context)
+    # ===============================
+    # Track.delete_track(id)
+
+    # ===============================
+    # context = {}
+    # try:
+    #     trackobj = Track.objects.get(id=id)  # Fetch the trainee to be deleted
+    #     if request.method == "GET":
+    #         trackobj.delete()
+    #         return redirect("track_list")
+    #     context["track"] = trackobj
+    # except Track.DoesNotExist:
+    #     return HttpResponse("track not found", status=404)
+    # return render(request, "track/delete.html", context)
 
 
 def track_details(request, id):
