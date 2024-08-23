@@ -15,6 +15,10 @@ pip install pillow
 
 
 
+https://pypi.org/project/django-crispy-forms/
+pip install django-crispy-forms
+
+
 
 
 pip freeze > requirements.txt 

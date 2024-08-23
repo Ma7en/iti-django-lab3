@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 
 
 # Create your views here.
@@ -11,18 +12,38 @@ def track_list(request):
     return render(request, "track/list.html", context)
 
 
+# def track_create(request):
+#     context = {}
+#     if request.method == "POST":
+#         # validation on the server side
+#         name = request.POST["name"]
+#         description = request.POST["description"]
+#         image = request.FILES.get("image")
+#         if len(name) > 0 and len(name) <= 100 and description and image:
+#             trackobj = Track.create_track(name, description, image)
+#             return redirect(trackobj)
+#         else:
+#             context["error"] = "Invalid data"
+#     return render(request, "track/create.html", context)
+
+
 def track_create(request):
     context = {}
+    form = CreateTrack()
+    context["form"] = form
     if request.method == "POST":
-        # validation on the server side
-        name = request.POST["name"]
-        description = request.POST["description"]
-        image = request.FILES.get("image")
-        if len(name) > 0 and len(name) <= 100 and description and image:
-            trackobj = Track.create_track(name, description, image)
+        # publich data user enter
+        form = CreateTrack(request.POST, request.FILES)
+        if form.is_valid():
+            # create object from book
+            trackobj = Track.create_track(
+                form.cleaned_data["name"],
+                form.cleaned_data["description"],
+                form.cleaned_data["image"],
+            )
             return redirect(trackobj)
         else:
-            context["error"] = "Invalid data"
+            context["error"] = form.errors
 
     return render(request, "track/create.html", context)
 
