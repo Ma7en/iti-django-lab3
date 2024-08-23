@@ -15,14 +15,11 @@ def track_create(request):
     context = {}
     if request.method == "POST":
         # validation on the server side
-        if (
-            len(request.POST["name"]) > 0
-            and len(request.POST["name"]) <= 100
-            and request.POST["description"]
-        ):
-            name = request.POST["name"]
-            description = request.POST["description"]
-            trackobj = Track.create_track(name, description)
+        name = request.POST["name"]
+        description = request.POST["description"]
+        image = request.FILES.get("image")
+        if len(name) > 0 and len(name) <= 100 and description and image:
+            trackobj = Track.create_track(name, description, image)
             return redirect(trackobj)
         else:
             context["error"] = "Invalid data"
@@ -37,16 +34,10 @@ def track_update(request, id):
         if request.method == "POST":
             name = request.POST["name"]
             description = request.POST["description"]
-            if len(name) > 0 and len(name) <= 100 and description:
-                # trackobj.name = request.POST["name"]
-                # trackobj.description = request.POST["description"]
-                # trackobj.save()
-                # ==============
-                # name = request.POST["name"]
-                # description = request.POST["description"]
-                # save()
-                # return redirect("track_list")
-                track_url = Track.track_update(id, name, description)
+            image = request.FILES["image"]
+
+            if len(name) > 0 and len(name) <= 100 and description and image:
+                track_url = Track.track_update(id, name, description, image)
                 return redirect(track_url)
             else:
                 context["error"] = "Invalid data"

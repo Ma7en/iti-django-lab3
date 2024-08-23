@@ -10,6 +10,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>description</th>
+            <th>Image</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -19,6 +20,9 @@
             <td>{{track.id}}</td>
             <td>{{track.name}}</td>
             <td>{{track.description}}</td>
+            <td>
+                <img width="200px" src="{{track.getimage}}" alt="" />
+            </td>
             <td>
                 <a href="{%url 'track_details' track.id%}">Details</a>
                 <a href="{%url 'track_update' track.id%}">Update</a>
