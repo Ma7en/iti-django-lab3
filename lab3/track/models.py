@@ -20,8 +20,9 @@ class Track(models.Model):
         return reverse("track_list")
 
     @classmethod
-    def list_track():
-        pass
+    def list_track(cls):
+        return cls.objects.all()
+        # return cls.get_list_url()
 
     @classmethod
     def create_track(cls, name, description):

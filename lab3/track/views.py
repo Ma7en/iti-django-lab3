@@ -5,8 +5,14 @@ from .models import *
 
 # Create your views here.
 def track_list(request):
+    # pass
+    # context = {}
+    # tracks = Track.objects.all()
+    # context["tracks"] = tracks
+    # return render(request, "track/list.html", context)
+    # =================================================================
     context = {}
-    tracks = Track.objects.all()
+    tracks = Track.list_track()
     context["tracks"] = tracks
     return render(request, "track/list.html", context)
 
