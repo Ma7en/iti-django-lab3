@@ -22,7 +22,7 @@
 
     <tbody>
         {% for track in tracks %}
-        <tr>
+        <tr id="track-{{ track.id }}">
             <td>{{track.id}}</td>
             <td>{{track.name}}</td>
             <td>{{track.description}}</td>

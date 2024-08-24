@@ -56,10 +56,14 @@ def track_update(request, id):
         if request.method == "POST":
             name = request.POST["name"]
             description = request.POST["description"]
-            image = request.FILES["image"]
 
-            if len(name) > 0 and len(name) <= 100 and description and image:
-                track_url = Track.track_update(id, name, description, image)
+            if "image" in request.FILES:
+                image = request.FILES["image"]
+            else:
+                image = trackobj.image
+
+            if len(name) > 0 and len(name) <= 100 and description:
+                track_url = Track.update_track(id, name, description, image)
                 return redirect(track_url)
             else:
                 context["error"] = "Invalid data"
@@ -80,20 +84,19 @@ def track_delete(request, id):
     #     return HttpResponse("track not found", status=404)
     # return render(request, "track/list.html", context)
     # ============================================================
-    try:
-        trackobj = Track.objects.get(pk=id)
-        trackobj.delete()
-        return JsonResponse({"success": True})
-    except Track.DoesNotExist:
-        return JsonResponse({"success": False, "error": "Track not found"}, status=404)
-    # ============================================================
     # try:
-    #     if request.method == "POST":
-    #         trackobj = Track.delete_track(id)
-    #         trackobj.delete()
-    #         return JsonResponse({"success": True})  # استجابة JSON
+    #     trackobj = Track.objects.get(pk=id)
+    #     trackobj.delete()
+    #     return JsonResponse({"success": True})
     # except Track.DoesNotExist:
     #     return JsonResponse({"success": False, "error": "Track not found"}, status=404)
+    # ============================================================
+    try:
+        if request.method == "POST":
+            Track.delete_track(id)
+            return JsonResponse({"success": True})
+    except Track.DoesNotExist:
+        return JsonResponse({"success": False, "error": "Track not found"}, status=404)
 
 
 def track_details(request, id):

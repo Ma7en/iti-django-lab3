@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+import os
+from django.conf import settings
 
 
 # Create your models here.
@@ -34,17 +36,33 @@ class Track(models.Model):
         return cls.get_list_url()
 
     @classmethod
-    def track_update(cls, id, name, description, image):
+    def update_track(cls, id, name, description, image):
         trackobj = cls.objects.get(pk=id)
         trackobj.name = name
         trackobj.description = description
+
+        if image and trackobj.image and trackobj.image != image:
+            old_image_path = os.path.join(settings.MEDIA_ROOT, trackobj.image.name)
+            if os.path.exists(old_image_path):
+                os.remove(old_image_path)
+
         trackobj.image = image
         trackobj.save()
         return cls.get_list_url()
 
     @classmethod
     def delete_track(cls, id):
-        cls.objects.filter(pk=id).delete()
+        track = cls.objects.get(pk=id)
+        if track.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, track.image.name)
+            print(f"Attempting to delete image: {image_path}")  # Debugging line
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                print("Image deleted successfully")  # Debugging line
+            else:
+                print("Image file does not exist")  # Debugging line
+
+        track.delete()
         return cls.get_list_url()
 
     @classmethod
