@@ -1,12 +1,11 @@
-{% extends 'base.html' %} {% block title %}
+{% extends 'base.html' %} {%load crispy_forms_tags %} {% block title %}
 <div>
     <h1>Update Track</h1>
 </div>
 {% endblock %} {% block content %}
 
 <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-
+    {% csrf_token %} {% comment %}
     <div>
         <label for="name">Name: </label>
         <input
@@ -33,6 +32,7 @@
         <label for="image">Image: </label>
         <input type="file" id="image" name="image" value="{{ track.image }}" />
     </div>
+    {% endcomment %} {{form|crispy}}
 
     <div>
         <input type="submit" value="Submit" />
