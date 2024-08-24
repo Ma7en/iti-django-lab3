@@ -27,6 +27,20 @@ class Account(models.Model):
         return f"/media/{self.image}"
 
     @classmethod
+    def getall(cls):
+        return [
+            (
+                account.id,
+                account.username,
+                account.email,
+                account.password,
+                account.image,
+                account.created_at,
+            )
+            for account in cls.objects.all()
+        ]
+
+    @classmethod
     def list_account(cls):
         return cls.objects.all()
 

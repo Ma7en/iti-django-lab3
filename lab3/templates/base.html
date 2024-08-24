@@ -43,6 +43,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
+                {% comment %} track {% endcomment %}
                 $(".delete-btn-track").click(function () {
                     var trackId = $(this).data("id");
                     var row = $("#track-" + trackId);
@@ -70,6 +71,7 @@
                     }
                 });
 
+                {% comment %} account {% endcomment %}
                 $(".delete-btn-account").click(function () {
                     var accountId = $(this).data("id");
                     var row = $("#account-" + accountId);
@@ -79,6 +81,34 @@
                     ) {
                         $.ajax({
                             url: "/Account/Delete/" + accountId,
+                            type: "POST",
+                            data: {
+                                csrfmiddlewaretoken: "{{ csrf_token }}",
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    row.remove();
+                                } else {
+                                    alert(response.error || "Error occurred.");
+                                }
+                            },
+                            error: function () {
+                                alert("Error: Unable to delete the track.");
+                            },
+                        });
+                    }
+                });
+
+                {% comment %} trainee {% endcomment %}
+                $(".delete-btn-trainee").click(function () {
+                    var traineeId = $(this).data("id");
+                    var row = $("#trainee-" + traineeId);
+
+                    if (
+                        confirm("Are you sure you want to delete this trainee?")
+                    ) {
+                        $.ajax({
+                            url: "/Trainee/Delete/" + traineeId,
                             type: "POST",
                             data: {
                                 csrfmiddlewaretoken: "{{ csrf_token }}",

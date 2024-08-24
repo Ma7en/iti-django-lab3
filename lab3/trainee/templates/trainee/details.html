@@ -24,15 +24,24 @@
     <tbody>
         <tr>
             <td>{{trainee.id}}</td>
+
             <td>{{trainee.first_name}}</td>
             <td>{{trainee.last_name}}</td>
+
             <td>{{trainee.date_of_birth}}</td>
             <td>{{trainee.account_obj.username}}</td>
+
             <td>{{trainee.track_obj.name}}</td>
+
             <td>
                 <a href="{%url 'trainee_details' trainee.id%}">Details</a>
                 <a href="{%url 'trainee_update' trainee.id%}">Update</a>
+                {% comment %}
                 <a href="{%url 'trainee_delete' trainee.id%}">Delete</a>
+                {% endcomment %}
+                <button class="delete-btn-trainee" data-id="{{ trainee.id }}">
+                    Delete
+                </button>
             </td>
         </tr>
     </tbody>

@@ -23,6 +23,18 @@ class Track(models.Model):
         return f"/media/{self.image}"
 
     @classmethod
+    def getall(cls):
+        return [
+            (
+                track.id,
+                track.name,
+                track.description,
+                track.image,
+            )
+            for track in cls.objects.all()
+        ]
+
+    @classmethod
     def list_track(cls):
         return cls.objects.all()
 
