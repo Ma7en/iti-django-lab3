@@ -38,17 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    #
+    # apps
     "account.apps.AccountConfig",
     "track.apps.TrackConfig",
     "trainee.apps.TraineeConfig",
-    #
-    # "base",
+    # crispy_forms
     "crispy_forms",
     "crispy_bootstrap5",
+    # scss
 ]
 
-#
+
+# bootstrap
 # CRISPY_TEMPLATE_PACK = "bootstrap4"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -92,7 +93,7 @@ DATABASES = {
     "default": {
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
-        #
+        # my database
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "iti_django_lab3",
         "USER": "django",
@@ -138,9 +139,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = ["static/"]
+
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
