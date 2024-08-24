@@ -16,18 +16,38 @@
         <title>{% block pagetitle %} {% endblock %}</title>
     </head>
     <body>
-        <header>
-            <div class="container">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="{% url 'account_list' %}">account list</a>
+        <header class="header text-bg-dark">
+            <div
+                class="container d-flex align-items-center justify-content-between fs-3"
+            >
+                <a href="" class="nav-link">App</a>
+
+                <nav class="nav">
+                    <ul
+                        class="d-flex align-items-center justify-content-between list-unstyled"
+                    >
+                        <li class="nav-item">
+                            <a
+                                href="{% url 'account_list' %}"
+                                class="nav-link text-white"
+                                >account list</a
+                            >
                         </li>
-                        <li>
-                            <a href="{% url 'track_list' %}">track list</a>
+
+                        <li class="nav-item">
+                            <a
+                                href="{% url 'track_list' %}"
+                                class="nav-link text-white"
+                                >track list</a
+                            >
                         </li>
-                        <li>
-                            <a href="{% url 'trainee_list' %}">trainee list</a>
+
+                        <li class="nav-item">
+                            <a
+                                href="{% url 'trainee_list' %}"
+                                class="nav-link text-white"
+                                >trainee list</a
+                            >
                         </li>
                     </ul>
                 </nav>
