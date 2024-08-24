@@ -1,12 +1,11 @@
-{% extends 'base.html' %} {% block title %}
+{% extends 'base.html' %} {%load crispy_forms_tags %} {% block title %}
 <div>
     <h1>Update Account</h1>
 </div>
 
 {% endblock %} {% block content %}
-<form method="POST">
-    {% csrf_token %}
-
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {% comment %}
     <div>
         <label for="username">Username: </label>
         <input
@@ -39,6 +38,7 @@
             required
         />
     </div>
+    {% endcomment %} {{form|crispy}}
 
     <div>
         <input type="submit" value="Submit" />
