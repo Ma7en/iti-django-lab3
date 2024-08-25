@@ -73,9 +73,41 @@ django@@1
 // =======================================================================
 
 
+# --> open postgresql
+su - postgres
+mazen@@1
+psql
+
+
+
+# --> create user
+CREATE USER django WITH PASSWORD 'mazen@@1';
+CREATE DATABASE iti_django_lab3;
+
+
+
+# create database 
 create database iti_django_lab3;
 
 
+
+# --> privileges
+GRANT ALL PRIVILEGES ON DATABASE iti_django_lab3 TO django;
+
+GRANT INSERT, UPDATE, SELECT, DELETE ON TABLE trainee TO django;
+GRANT INSERT, UPDATE, SELECT, DELETE ON TABLE track TO django;
+
+GRANT USAGE, SELECT ON SEQUENCE trainee_id_seq TO django;
+GRANT USAGE, SELECT ON SEQUENCE track_id_seq TO django;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
+
+
+
+# --> remove user from database
+#  قبل حذف اليوزر 
+# تاكد من حذف كل قواعد البيانات التي للكذلك المستخدم الصلاحية عليها
+DROP USER django;
 
 
 Account:-
@@ -101,19 +133,6 @@ Trainee:-
 - track_obj 
 
 
-
-su - postgres
-
-mazen@@1
-
-psql 
-
-\du 
-# show users 
-
-
-\l
-# show database
 
 
 django
