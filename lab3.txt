@@ -1,7 +1,11 @@
 // =======================================================================
 // =======================================================================
 
+
+
+# install python on windows
 https://www.python.org/downloads/windows/
+
 python --version
 
 
@@ -56,9 +60,12 @@ pip install django-sass-processor libsass
 
 
 
-
+# ubuntu 
 pip freeze > requirements.txt 
 pip install -r requirements.txt
+
+
+# windows 
 
 
 
