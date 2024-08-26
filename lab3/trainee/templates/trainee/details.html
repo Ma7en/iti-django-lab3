@@ -13,6 +13,7 @@
             <th>Last Name</th>
 
             <th>Date of Birth</th>
+            <th>Image</th>
 
             <th>Account Username</th>
             <th>Track Name</th>
@@ -29,8 +30,11 @@
             <td>{{trainee.last_name}}</td>
 
             <td>{{trainee.date_of_birth}}</td>
-            <td>{{trainee.account_obj.username}}</td>
+            <td>
+                <img width="200px" src="{{trainee.getimage}}" alt="" />
+            </td>
 
+            <td>{{trainee.account_obj.username}}</td>
             <td>{{trainee.track_obj.name}}</td>
 
             <td>
