@@ -34,9 +34,9 @@ wvenv\Scripts\activate
 
 
 pip install django 
+python.exe -m pip install --upgrade pip
 pip install psycopg2-binary
 pip install pillow 
-pip install --upgrade pip
 
 
 https://www.youtube.com/watch?v=pqGXerhF4cM
@@ -82,7 +82,13 @@ python3 manage.py startapp track
 python3 manage.py startapp trainee 
 
 
+# ubuntu 
 python3 manage.py runserver 
+
+
+
+# windows 
+python manage.py runserver 
 
 
 
@@ -120,6 +126,8 @@ GRANT USAGE, SELECT ON SEQUENCE trainee_id_seq TO django;
 GRANT USAGE, SELECT ON SEQUENCE track_id_seq TO django;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
+
+GRANT ALL PRIVILEGES ON SCHEMA public TO django;
 
 
 
@@ -164,10 +172,20 @@ django@@1
 // =======================================================================
 // =======================================================================
 
+# migrate
 
+# ubuntu
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py createsuperuser
+
+
+# windows 
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
+
 
 
 django
