@@ -19,7 +19,7 @@ class Trainee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField()
-    image = models.ImageField(upload_to="track/images/", blank=True, null=True)
+    image = models.ImageField(upload_to="trainee/images/", blank=True, null=True)
     account_obj = models.ForeignKey("account.Account", on_delete=models.CASCADE)
     track_obj = models.ForeignKey("track.Track", on_delete=models.CASCADE)
 
